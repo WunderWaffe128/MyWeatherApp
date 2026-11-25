@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyWeatherApp</string>
+    <string name="widget_description">Погода по выбранному городу или текущей геолокации</string>
+</resources>

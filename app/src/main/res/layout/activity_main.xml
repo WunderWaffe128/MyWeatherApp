@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#07111F"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/atmospheric_glass_sky" />
+
+    <ImageView
+        android:id="@+id/seasonOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.72"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/season_winter_overlay" />
+
+    <View
+        android:id="@+id/weatherScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/weather_scrim" />
+
+    <View
+        android:id="@+id/ambientOrb"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-96dp"
+        android:layout_marginEnd="-78dp"
+        android:alpha="0.65"
+        android:background="@drawable/ambient_orb" />
+
+    <ScrollView
+        android:id="@+id/weatherScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="50dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="72dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:contentDescription="Небо рядом"
+                        android:src="@drawable/ic_header_sky" />
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/headerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.02"
+                        android:text="Небо рядом"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/headerSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Ваше персональное окно в атмосферу"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/menuButton"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/glass_chip"
+                    android:contentDescription="Настройки и оформление"
+                    android:padding="9dp"
+                    android:src="@drawable/ic_tune" />
+            </LinearLayout>
+
+            <com.example.myweatherapp.LiquidGlassLayout
+                android:id="@+id/searchContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="22dp"
+                android:elevation="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingEnd="7dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:alpha="0.9"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/white" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/cityEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:completionThreshold="2"
+                    android:dropDownVerticalOffset="8dp"
+                    android:hint="Найти город"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/searchButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/search_button"
+                    android:contentDescription="Найти погоду"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/white" />
+            </com.example.myweatherapp.LiquidGlassLayout>
+
+            <com.example.myweatherapp.LiquidGlassLayout
+                android:id="@+id/favoritesPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="★  Закреплённые города"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/manageFavoritesButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="Настроить"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/historyContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+            </com.example.myweatherapp.LiquidGlassLayout>
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/status_message"
+                android:padding="14dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="Не удалось загрузить данные" />
+
+            <com.example.myweatherapp.LiquidGlassLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <ImageView
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+                    android:alpha="0.92"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_weather_spark"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Как там за окном?"
+                    android:textColor="@color/white"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:gravity="center"
+                    android:text="Введите город — покажем погоду сейчас и прогноз на будущее"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+            </com.example.myweatherapp.LiquidGlassLayout>
+
+            <ProgressBar
+                android:id="@+id/loadingProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/weatherContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/currentWeatherCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:elevation="12dp"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/locationText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:autoSizeMaxTextSize="18sp"
+                            app:autoSizeMinTextSize="13sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:autoSizeTextType="uniform"
+                            app:drawableStartCompat="@drawable/ic_location_small"
+                            app:drawableTint="@color/white"
+                            tools:text="Минск, Беларусь" />
+
+                        <TextView
+                            android:id="@+id/favoriteToggleButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:gravity="center"
+                            android:text="☆"
+                            android:textColor="#FFFFD86B"
+                            android:textSize="25sp"
+                            android:contentDescription="Закрепить город" />
+
+                        <TextView
+                            android:id="@+id/localTimeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            tools:text="16:42" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/temperatureText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:includeFontPadding="false"
+                                android:letterSpacing="-0.04"
+                                android:textColor="@color/white"
+                                android:textSize="72sp"
+                                app:autoSizeMaxTextSize="72sp"
+                                app:autoSizeMinTextSize="48sp"
+                                app:autoSizeStepGranularity="2sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="18°" />
+
+                            <TextView
+                                android:id="@+id/weatherConditionText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:maxLines="2"
+                                android:textColor="@color/white"
+                                android:textSize="19sp"
+                                app:autoSizeMaxTextSize="19sp"
+                                app:autoSizeMinTextSize="13sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="Переменная облачность" />
+
+                            <TextView
+                                android:id="@+id/highLowText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:maxLines="2"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                app:autoSizeMaxTextSize="14sp"
+                                app:autoSizeMinTextSize="11sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="Макс. 21°  •  Мин. 12°" />
+                        </LinearLayout>
+
+                        <com.example.myweatherapp.AnimatedWeatherIconView
+                            android:id="@+id/weatherIcon"
+                            android:layout_width="112dp"
+                            android:layout_height="112dp"
+                            android:contentDescription="Погодные условия" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@color/glass_divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <include layout="@layout/weather_metric" android:id="@+id/humidityMetric" />
+                        <include layout="@layout/weather_metric" android:id="@+id/windMetric" />
+                        <include layout="@layout/weather_metric" android:id="@+id/feelsMetric" />
+                    </LinearLayout>
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/radarCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp">
+
+                    <TextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/glass_chip"
+                        android:gravity="center"
+                        android:text="◉"
+                        android:textColor="#FF7DDCFF"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Радар осадков"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="2"
+                            android:text="Карта дождя и снега за последние 2 часа"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="44dp"
+                        android:gravity="center"
+                        android:text="›"
+                        android:textColor="@color/white"
+                        android:textSize="32sp" />
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="По часам"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/hourlyContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="8dp" />
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Температура и осадки"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/chartCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="238dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:id="@+id/chartSummary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Температура меняется плавно"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:paddingStart="10dp"
+                        android:text="Линия — температура  •  столбцы — вероятность осадков"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+
+                    <com.example.myweatherapp.WeatherChartView
+                        android:id="@+id/weatherChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Прогноз на дни"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/dailyContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Подробности"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/detailsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="76dp" android:layout_weight="1" android:gravity="center_vertical" android:orientation="horizontal">
+                            <com.example.myweatherapp.LiquidGlassLayout android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:orientation="vertical" android:padding="10dp">
+                                <ImageView android:id="@+id/detailWindIcon" android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Направление ветра" android:src="@drawable/ic_detail_compass" />
+                            </com.example.myweatherapp.LiquidGlassLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/detailWindValue" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="sans-serif-medium" android:maxLines="1" android:text="—" android:textColor="@color/white" android:textSize="15sp" />
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Направление" android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="76dp" android:layout_marginStart="8dp" android:layout_weight="1" android:gravity="center_vertical" android:orientation="horizontal">
+                            <com.example.myweatherapp.LiquidGlassLayout android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:orientation="vertical" android:padding="10dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Давление" android:src="@drawable/ic_detail_pressure" />
+                            </com.example.myweatherapp.LiquidGlassLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/detailPressureValue" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="sans-serif-medium" android:maxLines="1" android:text="—" android:textColor="@color/white" android:textSize="15sp" />
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Давление" android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="76dp" android:layout_weight="1" android:gravity="center_vertical" android:orientation="horizontal">
+                            <com.example.myweatherapp.LiquidGlassLayout android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:orientation="vertical" android:padding="10dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Видимость" android:src="@drawable/ic_detail_visibility" />
+                            </com.example.myweatherapp.LiquidGlassLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/detailVisibilityValue" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="sans-serif-medium" android:maxLines="1" android:text="—" android:textColor="@color/white" android:textSize="15sp" />
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Видимость" android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="76dp" android:layout_marginStart="8dp" android:layout_weight="1" android:gravity="center_vertical" android:orientation="horizontal">
+                            <com.example.myweatherapp.LiquidGlassLayout android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:orientation="vertical" android:padding="10dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Порывы ветра" android:src="@drawable/ic_detail_gust" />
+                            </com.example.myweatherapp.LiquidGlassLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/detailGustValue" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="sans-serif-medium" android:maxLines="1" android:text="—" android:textColor="@color/white" android:textSize="15sp" />
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Порывы" android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/astronomyCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/astronomyTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Солнце, Луна и воздух"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/astronomyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:lineSpacingExtra="5dp"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        tools:text="Восход 08:37  •  Закат 17:42\nЛуна: растущая  •  Воздух: хороший" />
+
+                    <com.example.myweatherapp.CelestialView
+                        android:id="@+id/celestialView"
+                        android:layout_width="match_parent"
+                        android:layout_height="214dp"
+                        android:layout_marginTop="8dp" />
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <com.example.myweatherapp.LiquidGlassLayout
+                    android:id="@+id/adviceCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:gravity="center"
+                        android:text="✦"
+                        android:textColor="#FFFFD86B"
+                        android:textSize="27sp" />
+
+                    <TextView
+                        android:id="@+id/adviceText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:lineSpacingExtra="3dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="Сегодня пригодится тёплая непромокаемая куртка." />
+                </com.example.myweatherapp.LiquidGlassLayout>
+
+                <TextView
+                    android:id="@+id/updatedText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp"
+                    tools:text="Обновлено в 16:42" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

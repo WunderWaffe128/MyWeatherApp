@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background_compact">
+
+    <ViewFlipper
+        android:id="@+id/widgetBackgroundMotion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoStart="true"
+        android:flipInterval="3200"
+        android:inAnimation="@anim/widget_float_in"
+        android:outAnimation="@anim/widget_float_out">
+        <ImageView android:id="@+id/widgetMotion1" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@null" android:scaleType="fitCenter" />
+        <ImageView android:id="@+id/widgetMotion2" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@null" android:scaleType="fitCenter" />
+        <ImageView android:id="@+id/widgetMotion3" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@null" android:scaleType="fitCenter" />
+    </ViewFlipper>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingTop="30dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/widgetCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Погода"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp" />
+
+        <ViewFlipper
+            android:id="@+id/widgetIconMotion"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="8dp"
+            android:autoStart="true"
+            android:flipInterval="3000"
+            android:inAnimation="@anim/widget_pulse_in"
+            android:outAnimation="@anim/widget_pulse_out">
+            <ImageView android:id="@+id/widgetIcon" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="Погода" android:padding="4dp" android:scaleType="fitCenter" android:src="@drawable/ic_widget_cloud" />
+            <ImageView android:id="@+id/widgetIcon2" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="Погода" android:padding="4dp" android:scaleType="fitCenter" android:src="@drawable/ic_widget_cloud" />
+            <ImageView android:id="@+id/widgetIcon3" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="Погода" android:padding="4dp" android:scaleType="fitCenter" android:src="@drawable/ic_widget_cloud" />
+        </ViewFlipper>
+
+        <TextView
+            android:id="@+id/widgetTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="sans-serif-light"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="--°"
+            android:textColor="#FFFFFFFF"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/widgetHighLow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="--° / --°"
+            android:textColor="#D9FFFFFF"
+            android:textSize="9sp" />
+
+        <TextView android:id="@+id/widgetCondition" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+        <TextView android:id="@+id/widgetUpdated" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/widgetRefresh"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="7dp"
+        android:background="@drawable/widget_refresh_background"
+        android:contentDescription="Обновить"
+        android:padding="6dp"
+        android:src="@drawable/ic_widget_refresh" />
+</FrameLayout>
